@@ -22,5 +22,15 @@ gem 'spring',        group: :development
 
 group :development, :test do
   gem 'debugger'
+  gem 'rspec-rails', '~> 3.0.0'
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'faker'
+  gem 'capybara', '~>2.4.3'
+  gem 'database_cleaner'
+  gem 'launchy', '~> 2.4.2'
+  gem 'selenium-webdriver', '~> 2.43.0'
 end
 
