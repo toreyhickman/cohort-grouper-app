@@ -1,1 +1,7 @@
+<% if flash[:notice] %>
+  <p>
+    <%= flash[:notice] %>
+  </p>
+<% end %>
+
 <%= link_to "Sign in with GitHub", "auth/github" %>

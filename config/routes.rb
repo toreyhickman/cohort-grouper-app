@@ -1,12 +1,22 @@
 Rails.application.routes.draw do
 
-  resources :sessions, only: [:create, :new, :destroy]
+  root to: 'sessions#new'
 
-  get  "signin",  to: 'sessions#new',     as: "signin"
-  post "signout", to: 'sessions#destroy', as: "signout"
-  get  "auth/failure", to: 'sessions#failure', as: "signin_failure"
+
+  resources :sessions, only: [:create, :new, :destroy]
+  get  "signin",                  to: 'sessions#new',     as: "signin"
+  post "signout",                 to: 'sessions#destroy', as: "signout"
+  get  "auth/failure",            to: 'sessions#failure', as: "signin_failure"
+  get  "auth/:provider/callback", to: 'sessions#create'
+
 
   resources :cohorts, only: [:index]
+
+
+
+
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

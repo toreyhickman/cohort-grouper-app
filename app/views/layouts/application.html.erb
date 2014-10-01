@@ -8,6 +8,7 @@
 </head>
 <body>
 
+  <%= (link_to "sign out", signout_path, method: :post) if session[:github_token] %>
 <%= yield %>
 
 </body>

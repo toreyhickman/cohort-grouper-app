@@ -14,6 +14,8 @@ describe SessionsController do
 
       before(:each) do
         setup_for_github_login_success
+        request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
+
         allow(GitHubUser).to receive(:new) { devbootcamp_owner }
       end
 
@@ -35,6 +37,8 @@ describe SessionsController do
 
       before(:each) do
         setup_for_github_login_success
+        request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
+
         allow(GitHubUser).to receive(:new) { not_devbootcamp_owner }
       end
 
@@ -80,6 +84,7 @@ describe SessionsController do
     context "Failed login with GitHub" do
       before(:each) do
         setup_for_github_login_failure
+        request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
       end
 
       it "redirects to the signin page" do
