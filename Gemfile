@@ -21,7 +21,9 @@ gem 'spring',        group: :development
 
 # GitHub
 gem 'omniauth-github', '~> 1.1.2'
-gem 'octokit'
+
+# Making HTTP requests
+gem 'rest-client'
 
 
 group :development, :test do
