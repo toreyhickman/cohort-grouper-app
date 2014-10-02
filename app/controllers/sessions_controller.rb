@@ -11,11 +11,8 @@ class SessionsController < ApplicationController
   def create
     auth = request.env["omniauth.auth"]
     github_token = auth.credentials.token
-    username = auth.info.nickname
 
-    user = GitHubUser.new(username: username, github_token: github_token)
-
-    if user.devbootcamp_owner?(username)
+    if ValidateDevBootcampOwner.call github_token
       session[:github_token] = github_token
       redirect_to cohorts_path
     else

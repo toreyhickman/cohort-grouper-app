@@ -2,10 +2,8 @@ require 'rails_helper'
 
 feature "GitHub Authentication through OmniAuth" do
   context "user is a member of DevBootcamp's owners team" do
-    let(:devbootcamp_owner) { double(devbootcamp_owner?: true) }
-
     background do
-      allow(GitHubUser).to receive(:new) { devbootcamp_owner }
+      allow(ValidateDevBootcampOwner).to receive(:call) { true }
     end
 
     scenario "GitHub signin successful and then signs out" do
@@ -33,10 +31,8 @@ feature "GitHub Authentication through OmniAuth" do
   end
 
   context "user is not a member of DevBootcamp's owners team" do
-    let(:not_devbootcamp_owner) { double(devbootcamp_owner?: false) }
-
     background do
-      allow(GitHubUser).to receive(:new) { not_devbootcamp_owner }
+      allow(ValidateDevBootcampOwner).to receive(:call) { false }
     end
 
     scenario "GitHub sign in successful but not authorized" do

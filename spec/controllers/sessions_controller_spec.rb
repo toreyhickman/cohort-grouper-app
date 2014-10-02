@@ -10,13 +10,11 @@ describe SessionsController do
 
   describe "POST#create" do
     context "GitHub user a Devbootcamp org owner" do
-      let(:devbootcamp_owner) { double(:devbootcamp_owner? => true) }
-
       before(:each) do
         setup_for_github_login_success
         request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
 
-        allow(GitHubUser).to receive(:new) { devbootcamp_owner }
+        allow(ValidateDevBootcampOwner).to receive(:call) { true }
       end
 
       it "assigns the user's github token to the session" do
@@ -33,13 +31,11 @@ describe SessionsController do
     end
 
     context "GitHub user not a Devbootcamp org owner" do
-      let(:not_devbootcamp_owner) { double(:devbootcamp_owner? => false) }
-
       before(:each) do
         setup_for_github_login_success
         request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
 
-        allow(GitHubUser).to receive(:new) { not_devbootcamp_owner }
+        allow(ValidateDevBootcampOwner).to receive(:call) { false }
       end
 
       it "redirects to the signin page" do
