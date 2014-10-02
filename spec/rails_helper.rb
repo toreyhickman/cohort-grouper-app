@@ -8,6 +8,8 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 ActiveRecord::Migration.maintain_test_schema!
 
+WebMock.disable_net_connect!(allow_localhost: true)
+
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.infer_spec_type_from_file_location!
@@ -16,6 +18,7 @@ RSpec.configure do |config|
 
   config.include FactoryGirl::Syntax::Methods
   config.include OmniAuthMacros
+  config.include ValidateDevBootcampOwnerMacros
 
   # Settings for DatabaseCleaner
   config.use_transactional_fixtures = false
