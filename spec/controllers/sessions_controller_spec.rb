@@ -2,9 +2,19 @@ require 'rails_helper'
 
 describe SessionsController do
   describe "GET#new" do
-    it "renders the :new template" do
-      get :new
-      expect(response).to render_template :new
+    context "not signed in" do
+      it "renders the :new template" do
+        get :new
+        expect(response).to render_template :new
+      end
+    end
+
+    context "signed in" do
+      it "redirects to cohorts index" do
+        session[:github_token] = :token
+        get :new
+        expect(response).to redirect_to cohorts_path
+      end
     end
   end
 

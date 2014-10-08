@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_filter :ensure_signin
+
   def new
   end
 
