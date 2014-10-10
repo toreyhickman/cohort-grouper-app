@@ -7,7 +7,7 @@ describe RetrieveActiveCohorts do
         allow(Date).to receive(:today) { Date.new(2014, 04, 15) }
         stub_get_active_cohorts_2014
 
-        expect(RetrieveActiveCohorts.call).to eq RetrieveActiveCohortsMacros::MOCK_ACTIVE_COHORTS_2014
+        expect(RetrieveActiveCohorts.call).to eq JSON[RetrieveActiveCohortsMacros::MOCK_ACTIVE_COHORTS_2014]
       end
     end
 
@@ -16,7 +16,7 @@ describe RetrieveActiveCohorts do
         active_cohorts_2014 = JSON[RetrieveActiveCohortsMacros::MOCK_ACTIVE_COHORTS_2014]
         active_cohorts_2015 = JSON[RetrieveActiveCohortsMacros::MOCK_ACTIVE_COHORTS_2015]
 
-        (active_cohorts_2014 + active_cohorts_2015).to_json
+        (active_cohorts_2014 + active_cohorts_2015)
       end
 
       it "returns active cohorts for the current and upcoming years" do
@@ -33,7 +33,7 @@ describe RetrieveActiveCohorts do
         active_cohorts_2013 = JSON[RetrieveActiveCohortsMacros::MOCK_ACTIVE_COHORTS_2013]
         active_cohorts_2014 = JSON[RetrieveActiveCohortsMacros::MOCK_ACTIVE_COHORTS_2014]
 
-        (active_cohorts_2013 + active_cohorts_2014).to_json
+        (active_cohorts_2013 + active_cohorts_2014)
       end
 
       it "returns active cohorts for the current and past years" do
