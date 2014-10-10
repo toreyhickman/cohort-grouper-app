@@ -1,6 +1,11 @@
 class Cohort < ActiveRecord::Base
+
   def self.find_by_param(param)
     where(slug: param).first
+  end
+
+  def self.locations
+    pluck(:location).uniq.sort
   end
 
   def to_param
