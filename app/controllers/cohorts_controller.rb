@@ -6,6 +6,8 @@ class CohortsController < ApplicationController
         cohort.location = cohort_data["location"]["name"]
       end
     end
+
+    @locations = Cohort.locations
   end
 
   def show

@@ -9,7 +9,9 @@ feature "select a cohort for which to make groups" do
   end
 
   context "user logged in" do
-    let(:expected_cohort_names) { RetrieveActiveCohortsMacros::MOCK_ACTIVE_COHORT_NAMES_2014 }
+    let(:expected_chicago_cohort_names) { RetrieveActiveCohortsMacros::MOCK_ACTIVE_CHICAGO_COHORT_NAMES_2014 }
+    let(:expected_san_francisco_cohort_names) { RetrieveActiveCohortsMacros::MOCK_ACTIVE_SAN_FRANCISCO_COHORT_NAMES_2014 }
+
     let(:unexpected_cohort_names) do
       RetrieveActiveCohortsMacros::MOCK_ACTIVE_COHORT_NAMES_2013 + RetrieveActiveCohortsMacros::MOCK_ACTIVE_COHORT_NAMES_2015
     end
@@ -26,14 +28,26 @@ feature "select a cohort for which to make groups" do
 
       expect(page).to have_content "Cohorts"
 
-      # Display appopriate cohorts
-      expected_cohort_names.each do |cohort_name|
+      # Ensure only approriate cohorts are displayed
+      (expected_san_francisco_cohort_names + expected_chicago_cohort_names).each do |cohort_name|
         expect(page).to have_content cohort_name
       end
 
       unexpected_cohort_names.each do |cohort_name|
         expect(page).to_not have_content cohort_name
       end
+
+      RetrieveActiveCohortsMacros::LOCATIONS_WITH_MOCK_COHORTS.each do |location|
+        expect(page).to have_content location
+      end
+
+      # Find cohorts under their locations
+      within('#chicago-cohorts') do
+        expected_chicago_cohort_names.each do |cohort_name|
+          expect(page).to have_content cohort_name
+        end
+      end
+
 
       click_link "Otters"
 

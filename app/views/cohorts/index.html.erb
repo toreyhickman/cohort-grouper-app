@@ -1,7 +1,13 @@
 <h1>Cohorts</h1>
 
-<ul>
-  <% @cohorts.each do |cohort| %>
-    <li><%= link_to cohort.mascot_name, cohort %></li>
-  <% end %>
-</ul>
+<% @locations.each do |location| %>
+  <div id="<%= "#{location.downcase}-cohorts" %>">
+  <h2><%= location %></h2>
+  <ul>
+    <% @cohorts.each do |cohort| %>
+      <% if cohort.location == location %>
+        <li><%= link_to cohort.mascot_name, cohort %></li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>

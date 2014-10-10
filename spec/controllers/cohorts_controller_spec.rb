@@ -40,6 +40,13 @@ describe CohortsController do
           get :index
           expect(assigns(:cohorts)).to match_array [cohort]
         end
+
+        it "collects cohort locations into @locations" do
+          allow(Cohort).to receive(:locations) { ["Chicago", "New York"] }
+
+          get :index
+          expect(assigns(:locations)).to match_array ["Chicago", "New York"]
+        end
       end
 
     describe "GET#show" do
