@@ -28,7 +28,7 @@ describe CohortsController do
         let(:cohort) { create(:cohort) }
 
         before(:each) do
-          allow(RetrieveActiveCohorts).to receive(:call) { [{ "name" => cohort.name, "slug" => cohort.slug }] }
+          allow(RetrieveActiveCohorts).to receive(:call) { [{ "name" => cohort.name, "slug" => cohort.slug, "location" => cohort.location }] }
         end
 
         it "renders the index template" do
