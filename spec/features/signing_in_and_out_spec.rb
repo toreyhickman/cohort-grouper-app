@@ -4,6 +4,9 @@ feature "GitHub Authentication through OmniAuth" do
   context "user is a member of DevBootcamp's owners team" do
     background do
       allow(ValidateDevBootcampOwner).to receive(:call) { true }
+
+      allow(Date).to receive(:today) { Date.new(2014, 04, 15) }
+      stub_get_active_cohorts_2014
     end
 
     scenario "GitHub signin successful and then signs out" do

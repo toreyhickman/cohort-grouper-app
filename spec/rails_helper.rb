@@ -19,6 +19,8 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include OmniAuthMacros
   config.include ValidateDevBootcampOwnerMacros
+  config.include LoginMacros
+  config.include RetrieveActiveCohortsMacros
 
   # Settings for DatabaseCleaner
   config.use_transactional_fixtures = false

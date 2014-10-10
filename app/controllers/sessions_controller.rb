@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   skip_filter :ensure_signin
 
   def new
+    redirect_to cohorts_path if signed_in?
   end
 
   def destroy
