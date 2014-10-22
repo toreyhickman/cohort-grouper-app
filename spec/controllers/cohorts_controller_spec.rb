@@ -28,7 +28,7 @@ describe CohortsController do
         let(:cohort) { create(:cohort) }
 
         before(:each) do
-          allow(RetrieveActiveCohorts).to receive(:call) { [{ "name" => cohort.name, "slug" => cohort.slug, "location" => cohort.location }] }
+          allow(RetrieveActiveCohorts).to receive(:call) { [{ "name" => "Otters 2014", "slug" => "otters-2014", "location" => "Chicago" }] }
         end
 
         it "renders the index template" do
@@ -37,8 +37,18 @@ describe CohortsController do
         end
 
         it "collects active cohorts into @cohorts" do
+          expected_cohorts = [cohort]
           get :index
-          expect(assigns(:cohorts)).to match_array [cohort]
+          expect(assigns(:cohorts)).to match_array expected_cohorts
+        end
+
+        it "saves cohorts to the database" do
+          expect { get :index }.to change {Cohort.count}.by(1)
+        end
+
+        it "saves only new cohorts to the database" do
+          cohort
+          expect { get :index }.to_not change { Cohort.count }
         end
 
         it "collects cohort locations into @locations" do
