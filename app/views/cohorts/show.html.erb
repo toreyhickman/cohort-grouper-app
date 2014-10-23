@@ -1,1 +1,3 @@
 <h1><%= @cohort.name %></h1>
+
+<%= link_to "Make New Groups", cohort_groupings_path(@cohort), { method: :post } %>
