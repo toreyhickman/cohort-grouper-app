@@ -22,6 +22,7 @@ RSpec.configure do |config|
   config.include ValidateDevBootcampOwnerMacros
   config.include LoginMacros
   config.include RetrieveActiveCohortsMacros
+  config.include UpdateCohortStudentsListMacros
 
   # Settings for DatabaseCleaner
   config.use_transactional_fixtures = false
