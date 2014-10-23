@@ -5,6 +5,7 @@ describe Cohort do
 
   describe "associations" do
     it { should have_many :groupings }
+    it { should have_many :students }
   end
 
   describe ".locations" do

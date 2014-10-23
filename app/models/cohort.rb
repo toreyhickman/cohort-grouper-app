@@ -1,6 +1,7 @@
 class Cohort < ActiveRecord::Base
 
   has_many :groupings
+  has_many :students
 
   def self.find_by_param(param)
     where(slug: param).first
