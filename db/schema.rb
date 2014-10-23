@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141010161106) do
+ActiveRecord::Schema.define(version: 20141023162021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,5 +23,11 @@ ActiveRecord::Schema.define(version: 20141010161106) do
   end
 
   add_index "cohorts", ["slug"], name: "index_cohorts_on_slug", unique: true, using: :btree
+
+  create_table "groupings", force: true do |t|
+    t.integer "cohort_id"
+  end
+
+  add_index "groupings", ["cohort_id"], name: "index_groupings_on_cohort_id", using: :btree
 
 end

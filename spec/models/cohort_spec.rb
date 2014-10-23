@@ -3,6 +3,10 @@ require 'rails_helper'
 describe Cohort do
   let(:cohort) { create(:cohort) }
 
+  describe "associations" do
+    it { should have_many :groupings }
+  end
+
   describe ".locations" do
     it "returns the unique locations of all cohorts" do
       create(:chicago_cohort)
