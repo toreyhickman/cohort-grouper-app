@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   get  "auth/:provider/callback", to: 'sessions#create'
 
 
-  resources :cohorts, only: [:index, :show]
+  resources :cohorts, { only: [:index, :show] } do
+    resources :groupings, { only: [:create] } do
+      resources :groups, { only: [:new] }
+    end
+  end
 
 
 
