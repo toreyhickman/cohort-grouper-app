@@ -25,6 +25,9 @@ gem 'omniauth-github', '~> 1.1.2'
 # Making HTTP requests
 gem 'rest-client'
 
+# Making groups
+gem 'garoupa'
+
 
 group :development, :test do
   gem 'debugger'
